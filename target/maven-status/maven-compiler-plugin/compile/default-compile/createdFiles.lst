@@ -1,0 +1,11 @@
+bankAccount\BankImpl.class
+program\Program.class
+bankAccount\Bank.class
+bankAccount\Operation$Optype.class
+ws\BankRestful.class
+bankAccount\Account.class
+bankAccount\AccountImpl.class
+bankAccount\ClientImpl.class
+bankAccount\Operation.class
+ws\ApplicationConfig.class
+bankAccount\Client.class

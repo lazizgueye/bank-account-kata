@@ -1,0 +1,103 @@
+			
+    <div ng-controller="homeCtrl">
+        
+         <div class="row">
+		  	<div class="col-sm-2">
+				<b><font style="font-size:22px">Client</font></b>
+				<div class="form-group">
+					<label for="firstname">Firstname</label>
+					<input type="text" class="form-control" id="firstname" ng-model="client.firstname">
+				</div>
+				<div class="form-group">
+					<label for="lastname">Lastname:</label>
+					<input type="text" class="form-control" id="lastname" ng-model="client.lastname">
+				</div>
+				<button class="btn btn-default btn-block" ng-disabled="client.bt_subscribe" ng-click="subscription(client.firstname,client.lastname)">Subscribe</button>
+			</div>
+			
+		  	<div class="col-sm-7">
+		  		<div class="row">
+		  			<div class="col-sm-12">
+		  				<b><font style="font-size:22px">Account List</font><span style="color:MediumSeaGreen">(#idClient={{idClient}})</span></b>
+						<div class="panel panel-default">
+							<table class="table table-bordered table-striped table-hover table-condensed">
+								<thead>
+									<tr class="info">
+										<th style="width:2%">#Id</th>
+										<th style="width:3%">Balance</th>
+										<th style="width:3%">Threshold</th>
+										<th>Last operation message</th>
+										<th style="width:2%">Select</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="pointeur" ng-repeat="x in accounts" ng-click="selectAccount(client.id, x.id, $index)" ng-style="{'background-color':x.id==idAccount?'Tomato':$index%2>0? 'LightGray':''}">
+										<td style="width:3%">{{x.id}}</td>
+										<td>{{x.balance}}€</td>
+										<td>{{x.thresholdState}}</td>
+										<td>{{x.message}}</td>							
+										<td><input type="radio" name="optradio" ng-checked="{{x.id==idAccount?'true':''}}" ></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="5">
+											<button type="button" class="btn btn-primary btn-block" ng-click="addAccount(client.id)" ng-disabled="!client.bt_subscribe">
+												Add new Account
+											</button>
+										</td>
+									</tr>
+								</tfoot>							
+							</table>
+						</div>				  				  					
+		  			</div>
+		  			
+		  			<div class="col-sm-12">
+		  				<b>
+		  					<font style="font-size:22px">Operations List</font><span style="color:Tomato">(#idAccount={{idAccount}})</span>
+		  				</b>
+						<div class="list">
+							<ul class="list-group" ng-repeat="x in accounts" ng-if="x.id==idAccount" ng-init="indexAccount=$index">
+								<li ng-repeat="y in accounts[indexAccount].operation | orderBy: '-date'"  ng-class="{'list-group-item list-group-item-success': y.type=='DEPOSIT', 'list-group-item list-group-item-warning': y.type=='WITHDRAWAL'}" style="padding: 3px 10px">
+									<b>{{y.date | date : "dd/MM/y hh'h'mm'm'ss's'"}} </b> 
+									### balance:{{y.balance}} ### 
+									<b>{{y.type}} </b> 
+									### amount:{{y.amount}} 
+								</li>
+							 </ul>
+						</div>
+		  			</div>
+		  		</div>				
+			</div>
+		  
+		  	<div class="col-sm-3">		  			  		
+				<b>
+					<font style="font-size:22px">Transactions</font>
+					<span style="color:Tomato">(#idAccount={{idAccount}})</span>
+				</b>			
+				<div class="form-group">
+					<label for="firstname"><u>Deposit</u></label>
+					<div class="form-inline">
+						<input type="text" class="form-control" size="20" placeholder="amount" ng-model="deposit_amount"> € 
+					</div>
+					<button class="btn btn-primary btn-block" ng-click="deposit(idAccount,deposit_amount)" ng-disabled="!client.bt_subscribe">
+						Deposit
+					</button>
+				</div>
+				<div class="form-group">
+					<label for="firstname"><u>Withdrawal</u></label>
+					<div class="form-inline">
+						<input type="text" class="form-control" placeholder="amount" ng-model="withdrawal_amount"> €
+					</div>			
+					<button class="btn btn-primary btn-block" ng-click="withdrawal(idAccount,withdrawal_amount)" ng-disabled="!client.bt_subscribe">
+						Withdrawal
+					</button>
+				</div>
+			</div>
+		</div>        
+			
+	</div>
+	
+	
+		 				
+				

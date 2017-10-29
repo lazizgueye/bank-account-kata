@@ -1,0 +1,32 @@
+
+/*############## BALISE ############## */
+
+body{font-family: 'trebuchet MS', Arial, sans-sherif; color: #181818; background-color:#B0E0E6;}
+header{width: 100%;	display: flex; justify-content: space-between; align-item: flex-end;}
+table {max-width:980px;/*table-layout:fixed; //margin:auto;***/}
+/*thead, tfoot {background:#f9f9f9; display:table; width:100%; width:calc(100% - 18px);}
+tbody {max-height:150px; overflow-y:auto; overflow-x:hidden; display:block; width:100%;}*/
+
+
+
+/*############## CLASS ############## */
+
+.affix {top: 0;	width: 100%;}	
+.affix + .container-fluid {padding-top: 70px;}
+.btn-block {
+	background-color: #117791;
+	box-shadow: 3px 3px 4px 0px #A4A4A4;
+	-moz-box-shadow: 3px 3px 4px 0px #A4A4A4;
+	-webkit-box-shadow: 3px 3px 4px 0px #A4A4A4;
+}
+.list{ height: 200px; overflow-y: auto;}
+.navbar{padding:0px;}
+.navbar-brand{margin:auto; padding-top: 14px;}
+.pointeur{cursor:pointer;}
+
+
+/*############## IDELEMENT ############## */
+
+#main{width:100%; /*900px*/	text-align: center; min-width:360px;}
+#view{margin-top:2%; text-align:justify;}
+
