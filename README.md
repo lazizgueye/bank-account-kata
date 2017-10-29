@@ -2,8 +2,8 @@
 manage your account
 
 #Goal:
-the goal of this project is to simule a Bank transaction (Deposit & Withdrawal) of a client account. 
-rules:
+simule a Bank transaction (Deposit & Withdrawal) of a client account. 
+#rules:
   * deposit : amount must > 0
   * withdraw: amount must > 0 and balance > -100
   * threshold reach : 100
