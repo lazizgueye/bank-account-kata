@@ -14,21 +14,32 @@ simule a Bank transaction (Deposit & Withdrawal) of a client account.
 </ul>
 
 <h3><b>#Result :</b></h3>
-  * java : run programm class
-  * juint: run test
-      - coverage : 98% lock result/coverage.png file          
-           + Instruction : 70%
-           + Method : 70%
-           + Line : 71%
-           + Type : 75%
+<ul>
+ <li>java : run programm class</li>
+ <li>juint: run test</li>
+ <li>coverage : 98% lock result/coverage.png file 
+   <ul>
+    <li>Instruction : 70%</li>
+    <li>Method : 70%</li>
+    <li>Line : 71%</li>
+    <li>Type : 75%</li>
+    </ul>
+ </li>
+</ul>
 
 <h3><b>#Config :</b></h3>
-  * back-end : j2ee
-  * front-end: angularjs
-  * service  : REST
-  * unit test: Junit
-  * integration test : jenkins
+<ul>
+ <li>back-end : j2ee</li>
+ <li>front-end: angularjs</li>
+ <li>service  : REST</li>
+ <li>unit test: Junit</li>
+ <li>integration test : jenkins</li>
+</ul>
 
 <h3><b>#Check :</b></h3>
-  look coverage.png to see a coverage result
-  look result/video to lauch a video excecution
+<ul>
+ <li>look coverage.png to see a coverage result</li>
+ <li>look result/video to lauch a video excecution</li>
+</ul>
+  
+  
