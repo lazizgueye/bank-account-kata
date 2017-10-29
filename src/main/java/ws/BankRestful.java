@@ -76,6 +76,40 @@ public class BankRestful {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@GET
+	@Path("getAccounts")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject getAccounts(){			
+		if(client != null) {
+			if(accounts.isEmpty())
+				return null;
+			else {		
+				JSONObject  result = new JSONObject();
+				JSONObject  accountTab = new JSONObject();
+				int indexTab = 0;
+				for(int i=0; i<accounts.size(); i++) {			
+					JSONObject  tab = new JSONObject();				
+						tab.put("id", accounts.get(i).getId());
+						tab.put("clientId", accounts.get(i).getClient().getId());
+						tab.put("clientFname", accounts.get(i).getClient().getFirstname());
+						tab.put("clientLname", accounts.get(i).getClient().getLastname());
+						tab.put("bank", accounts.get(i).getBank().getBank_name());			
+						tab.put("balance", accounts.get(i).getBalance());
+						tab.put("message", accounts.get(i).getMessage());
+						tab.put("thresholdState", accounts.get(i).getThreshold());			
+						tab.put("operation", accounts.get(i).checkOperations());
+						accountTab.put(indexTab,tab);
+						indexTab++;
+				}
+				result.put("client", client);
+				result.put("accounts", accountTab);
+				return result;
+			}
+		}
+		return null;
+	}
+	
 	@GET
 	@Path("addAccount/{idClient}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -123,6 +157,31 @@ public class BankRestful {
 			e.printStackTrace();
 		}				
 		return getAccount(accounts.get(indexAccount).getClient().getId());		
+	}
+	
+	@GET
+	@Path("transfert/{idSender}/{idReceiver}/{amount}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject transfert(@PathParam("idSender") int a, @PathParam("idReceiver") int b, @PathParam("amount") double m){			
+		try {
+			int indexA = 0;
+			int indexB = 0;
+			for(int i=0; i<accounts.size(); i++) {
+				if(accounts.get(i).getId() == a)
+					indexA = i;
+				if(accounts.get(i).getId() == b)
+					indexB = i;
+			}
+			
+			if(indexA >= 0 && indexB >= 0) {
+				System.out.println("result"+accounts.get(indexA).transfert(accounts.get(indexB), m));
+			}
+			return getAccount(accounts.get(indexA).getClient().getId());	
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+			
 	}
 		
 	@GET

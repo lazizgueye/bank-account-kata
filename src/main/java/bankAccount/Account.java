@@ -8,10 +8,12 @@ public interface Account{
     public double getBalance();
     public boolean getThreshold();
     public String getMessage();
+    public void setMessage(String msg);
     public Bank getBank();
     public Client getClient();
     public boolean deposit(double amount) throws Exception;
     public boolean withdraw(double amount) throws Exception;
+    public boolean transfert(Account receiver, double amount) throws Exception;
     public ArrayList<Operation> checkOperations() ; 
 
 }

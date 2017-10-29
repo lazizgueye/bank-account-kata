@@ -11,56 +11,58 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 		$scope.client = {"id":"", "firstname":"", "lastname":"","bt_subscribe":false};
 		$scope.account = {"id":"", "balance":"", "message":"", "thresholdState":""};
 		$scope.operation = [];
+		$scope.clientsAccounts = [];
 		
 		// load all account of the client and choose by default the first account for transaction and operation
 		if($routeParams.idClient && $routeParams.idClient>0){
 			$http.get('http://localhost:8080/bank-account-kata/rest/bank/getAccount/'+$routeParams.idClient).success(function(response){
 					
-				 	$scope.idClient = response.client.id
-					$scope.client.id = $scope.idClient;
-					$scope.client.firstname = response.client.firstname;
-					$scope.client.lastname = response.client.lastname;
-					$scope.client.bt_subscribe = true;				
-						
-					$scope.accounts = response.accounts;				
+			 	$scope.idClient = response.client.id
+				$scope.client.id = $scope.idClient;
+				$scope.client.firstname = response.client.firstname;
+				$scope.client.lastname = response.client.lastname;
+				$scope.client.bt_subscribe = true;				
+					
+				$scope.accounts = response.accounts;				
 
-					// redirect to home if route don't exist
-					if($routeParams.idAccount && $routeParams.idAccount>0){
-						var found = false;						
-						for(var i=0; i<Object.keys($scope.accounts).length; i++){
-							if($scope.accounts[i].id==$routeParams.idAccount && $scope.accounts[i].clientId==$routeParams.idClient){
-								found = true;
-								$scope.idAccount = $routeParams.idAccount;
-								break;
-							}							
-						}
-						if(!found){
-							window.location.href= "#home";
-							window.location.reload();
-						}
+				// redirect to home if route don't exist
+				if($routeParams.idAccount && $routeParams.idAccount>0){
+					var found = false;						
+					for(var i=0; i<Object.keys($scope.accounts).length; i++){
+						if($scope.accounts[i].id==$routeParams.idAccount && $scope.accounts[i].clientId==$routeParams.idClient){
+							found = true;
+							$scope.idAccount = $routeParams.idAccount;
+							
+							TransactionService.option().getAccounts().success(function(response) {
+								$scope.clientsAccounts = response.accounts;				 
+				            });
+							break;
+						}							
 					}
-					
-					if(!$routeParams.idAccount || typeof $routeParams.idAccount=="undefined"){
-						var found = false;						
-						for(var i=0; i<Object.keys($scope.accounts).length; i++){
-							if($scope.accounts[i].clientId==$routeParams.idClient){
-								found = true;
-								$scope.idAccount = $scope.accounts[0].id;
-								break;
-							}							
-						}
-						if(!found){
-							window.location.href= "#home";
-							window.location.reload();
-						}
-					}
-					
-					/*if($routeParams.idAccount && $routeParams.idAccount>0 && response.accounts[$routeParams.idAccount] == null){
+					if(!found){
 						window.location.href= "#home";
-					}*/
-					
-					// choose the default idAccount (the first of the client
-					//$scope.idAccount_selected = ($routeParams.idAccount && response.accounts[$routeParams.idAccount].id>=0?response.accounts[$routeParams.idAccount].id:response.accounts[0].id);
+						window.location.reload();
+					}
+				}
+				
+				if(!$routeParams.idAccount || typeof $routeParams.idAccount=="undefined"){
+					var found = false;						
+					for(var i=0; i<Object.keys($scope.accounts).length; i++){
+						if($scope.accounts[i].clientId==$routeParams.idClient){
+							found = true;
+							$scope.idAccount = $scope.accounts[0].id;
+							TransactionService.option().getAccounts().success(function(response) { 
+								$scope.clientsAccounts = response.accounts;				 
+				            });
+							break;
+						}							
+					}
+					if(!found){
+						window.location.href= "#home";
+						window.location.reload();
+					}
+				}				
+				
 			});
 		}
 		
@@ -128,6 +130,28 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 				alert("error : withdrawal ### please select a account");
 	    }
 		
+		$scope.transfert = function(idAccountA, idAccountB, amount){
+			idA = parseInt(idAccountA);
+			idB = parseInt(idAccountB);
+			am = parseFloat(amount);
+			if(idA>0){
+				if(idB>0){
+					if(am>0){
+						TransactionService.option().transfert(idA, idB, am).success(function(response) {
+							var idClient = response.client.id;
+							window.location.href= "#home/"+idClient+"/"+idA;
+			             });
+					}
+					else
+						alert("error : transfert ### check amount values");
+				}
+				else
+					alert("error : transfert ### please select a account receiver");
+			}
+			else
+				alert("error : transfert ### please select a account sender");
+	    }
+		
 		$scope.selectAccount = function(idClient, idAccount, indexAccount){
 			$location.path('/home/'+idClient+'/'+idAccount).replace();
 			$scope.indexAccount_selected = indexAccount;
@@ -146,12 +170,7 @@ routeAppControllers.controller('navCtrl', ['$scope', '$location','$routeParams',
 		$scope.client = null;
 		$scope.idClient = $location.path().split("/")[2];
 		
-		/*if(!$scope.login && $scope.idClient && $scope.idClient>0){
-			alert($scope.login);
-			$scope.login = true;
-		}*/
 		
-
 		if(!$scope.login){			
 			LoginService.option().getClients().success(function(response) { 
 				$scope.clients = response.clients;
@@ -165,8 +184,7 @@ routeAppControllers.controller('navCtrl', ['$scope', '$location','$routeParams',
 							}
 						}
 					}
-				}
-				 
+				}				 
             });
 		}
 		

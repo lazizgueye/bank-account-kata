@@ -4,10 +4,7 @@ public class ClientImpl implements Client{
     private int id;
     private String lastName;
     private String firstName;
-   // private ArrayList<IAccount> comptes;
 
-    
-    //int countBank = 0 ;
     static int inc = 0;
     private synchronized int increment(){
     	return ++inc;
@@ -17,15 +14,6 @@ public class ClientImpl implements Client{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.id = increment() ;
-		//this.comptes = new ArrayList<IAccount>() ;
-    }
-
-    public void setFirstname (String firstname){
-    	this.firstName = firstname;
-    }
-
-    public void setLastname(String lastname){
-    	this.lastName = lastname;
     }
 
     @Override
@@ -43,8 +31,8 @@ public class ClientImpl implements Client{
     	return id;
     }
 
-  /*  public void addAccount3(IAccount c){
-    	comptes.add(c) ;
-    }*/
+    public String toString() {
+    	return this.getFirstname()+" "+this.getLastname()+" (#"+this.getId()+")";
+    }
 
 }

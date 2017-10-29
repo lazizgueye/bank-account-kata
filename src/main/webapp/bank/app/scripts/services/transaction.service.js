@@ -11,7 +11,9 @@ routeAppControllers.factory('TransactionService',['$http' ,function ($http) {
 			
 			service.addAccount = addAccount;
 			service.deposit = deposit;
+			service.getAccounts = getAccounts;
 			service.subscription = subscription;
+			service.transfert = transfert;
 			service.withdrawal = withdrawal;	
 			return service;
 		
@@ -42,6 +44,18 @@ routeAppControllers.factory('TransactionService',['$http' ,function ($http) {
 				};		
 				return	$http(req);
 			}
+			
+			/**
+		      * getACCOUNTS list of Client account.		
+		      * @return list account of Client;
+		      */
+			function getAccounts(){				 
+				var req = {
+					method: 'GET',
+					url: 'http://localhost:8080/bank-account-kata/rest/bank/getAccounts'
+				};		
+				return	$http(req);
+			}
 						
 			/**
 		      * SUBSCRIPTION a new client.		      
@@ -53,6 +67,21 @@ routeAppControllers.factory('TransactionService',['$http' ,function ($http) {
 				var req = {
 					method: 'GET',
 					url: 'http://localhost:8080/bank-account-kata/rest/bank/subscription/'+fname+'/'+lname
+				};		
+				return	$http(req);
+			}
+			
+			/**
+		      * TRANSFERT amount to client account.	
+		      * @param int a		#idAccount client (sender)      
+		      * @param int b 	#idAccount client (receiver)
+		      * @param double m	#amount to transfert
+		      * @return true/false;
+		      */
+			function transfert(a, b, m){
+				var req = {
+					method: 'GET',
+					url: 'http://localhost:8080/bank-account-kata/rest/bank/transfert/'+a+'/'+b+'/'+m
 				};		
 				return	$http(req);
 			}

@@ -58,7 +58,7 @@
 		  				</b>
 						<div class="list">
 							<ul class="list-group" ng-repeat="x in accounts" ng-if="x.id==idAccount" ng-init="indexAccount=$index">
-								<li ng-repeat="y in accounts[indexAccount].operation | orderBy: '-date'"  ng-class="{'list-group-item list-group-item-success': y.type=='DEPOSIT', 'list-group-item list-group-item-warning': y.type=='WITHDRAWAL'}" style="padding: 3px 10px">
+								<li ng-repeat="y in accounts[indexAccount].operation | orderBy: '-date'"  ng-class="{'list-group-item list-group-item-success': y.type=='DEPOSIT', 'list-group-item list-group-item-warning': y.type=='WITHDRAWAL', 'list-group-item list-group-item-info': y.type=='TRANSFERT'}" style="padding: 3px 10px">
 									<b>{{y.date | date : "dd/MM/y hh'h'mm'm'ss's'"}} </b> 
 									### balance:{{y.balance}} ### 
 									<b>{{y.type}} </b> 
@@ -91,6 +91,18 @@
 					</div>			
 					<button class="btn btn-primary btn-block" ng-click="withdrawal(idAccount,withdrawal_amount)" ng-disabled="!client.bt_subscribe">
 						Withdrawal
+					</button>
+				</div>
+				<div class="form-group">
+					<label for="firstname"><u>Transfert</u></label>
+					<div class="form-inline">
+						<input type="text" class="form-control" placeholder="amount" ng-model="transfert_amount"> €
+					</div>									  	
+			  		<select class="form-control" ng-model="idAReceive">
+			    		<option ng-repeat="x in clientsAccounts" value="{{x.id}}"> {{x.clientFname}} {{x.clientLname}} (#{{x.clientId}}) : account (#{{x.id}})</option>
+			  		</select>								
+					<button class="btn btn-primary btn-block" ng-click="transfert(idAccount,idAReceive,transfert_amount)" ng-disabled="!client.bt_subscribe">
+						Transfert
 					</button>
 				</div>
 			</div>

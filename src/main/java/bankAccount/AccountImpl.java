@@ -50,6 +50,10 @@ public class AccountImpl implements Account{
     public String getMessage(){
     	return message;
     }
+    @Override
+    public void setMessage(String msg){
+    	this.message = msg;
+    }
 
     @Override
     public Bank getBank(){
@@ -101,8 +105,26 @@ public class AccountImpl implements Account{
     }
     
     @Override
+	public boolean transfert(Account receiver, double amount) throws Exception {
+		boolean send = this.withdraw(amount);
+		if(send) {
+			boolean state = receiver.deposit(amount);
+			if(state) {
+				String client = receiver.getClient().toString();
+				receiver.setMessage("TRANSFERT Received ("+amount+") from "+client);				
+				histories.add(new Operation(Optype.TRANSFERT, balance, amount, client));
+				message = "Transfert : "+amount+" success: from account "+ this.compteid+" to account "+client ;
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+    
+    @Override
     public ArrayList<Operation> checkOperations(){
     	return histories;
     }
+	
 
 }
