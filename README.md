@@ -5,11 +5,13 @@ manage your account
 simule a Bank transaction (Deposit & Withdrawal) of a client account.
 
 <h3><b>#rules:</b></h3>
-  * deposit : amount must > 0
-  * withdraw: amount must > 0 and balance > -100
-  * threshold reach : 100
-  * list of all transaction for a client account
-  * client can have many account in the same bank
+<ul>
+ <li>deposit : amount must > 0</li>
+ <li>withdraw: amount must > 0 and balance > -100</li> 
+ <li>threshold reach : 100</li> 
+ <li>list of all transaction for a client account</li> 
+ <li>client can have many account in the same bank</li> 
+</ul>
 
 <h3><b>#Result :</b></h3>
   * java : run programm class
