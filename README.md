@@ -4,7 +4,7 @@ manage your account
 #Goal:
 simule a Bank transaction (Deposit & Withdrawal) of a client account.
 
-#rules:
+<b>#rules:</b>
   * deposit : amount must > 0
   * withdraw: amount must > 0 and balance > -100
   * threshold reach : 100
