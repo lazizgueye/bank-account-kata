@@ -6,9 +6,9 @@ simule a Bank transaction (Deposit & Withdrawal) of a client account.
 
 <h3><b>#rules:</b></h3>
 <ul>
- <li>deposit : amount must > 0</li>
- <li>withdraw: amount must > 0 and balance > -100</li> 
- <li>transfert: amount must > 0 and balance > -100</li> 
+ <li><span style='color:red'>deposit </span>: amount must > 0</li>
+ <li><span style='color:blue'>withdraw </span>: amount must > 0 and balance > -100</li> 
+ <li><span style='color:yellow'>transfert </span>: amount must > 0 and balance > -100</li> 
  <li>threshold reach : 100</li> 
  <li>list of all transaction for a client account</li> 
  <li>client can have many account in the same bank</li> 
