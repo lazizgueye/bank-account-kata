@@ -15,10 +15,10 @@ simule a Bank transaction (Deposit & Withdrawal) of a client account.
   * java : run programm class
   * juint: run test
       - coverage : 98% lock result/coverage.png file          
-            Instruction : 70%
-            Method : 70%
-            Line : 71%
-            Type : 75%
+           + Instruction : 70%
+           + Method : 70%
+           + Line : 71%
+           + Type : 75%
 
 #Config :
   * back-end : j2ee
