@@ -2,7 +2,8 @@
 manage your account
 
 #Goal:
-simule a Bank transaction (Deposit & Withdrawal) of a client account. 
+simule a Bank transaction (Deposit & Withdrawal) of a client account.
+
 #rules:
   * deposit : amount must > 0
   * withdraw: amount must > 0 and balance > -100
