@@ -8,6 +8,7 @@ simule a Bank transaction (Deposit & Withdrawal) of a client account.
 <ul>
  <li>deposit : amount must > 0</li>
  <li>withdraw: amount must > 0 and balance > -100</li> 
+ <li>transfert: amount must > 0 and balance > -100</li> 
  <li>threshold reach : 100</li> 
  <li>list of all transaction for a client account</li> 
  <li>client can have many account in the same bank</li> 
