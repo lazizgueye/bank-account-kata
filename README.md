@@ -2,7 +2,7 @@
 manage your account
 
 <h3><b>#Goal:</b></h3>
-simule a Bank transaction (Deposit & Withdrawal) of a client account.
+simule a Bank transaction (Deposit & Withdrawal & transfer) of a client account.
 
 <h3><b>#rules:</b></h3>
 <ul>
