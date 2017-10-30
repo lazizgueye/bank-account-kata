@@ -18,7 +18,7 @@ simule a Bank transaction (Deposit & Withdrawal & transfer) of a client account.
 <ul>
  <li>java : run programm class</li>
  <li>juint: run test</li>
- <li>coverage : 98% test <u>lock result/coverage.png file</u> 
+ <li><b>coverage : 98% test : (check result/coverage.png file)</b> 
    <ul>
     <li>Instruction : 70%</li>
     <li>Method : 70%</li>
